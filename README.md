@@ -1,5 +1,7 @@
 NixOS profiles to optimize settings for different hardware.
 
+**Note**: This fork requires a nixpkgs with this PR merged: [188478](https://github.com/NixOS/nixpkgs/pull/188478).
+
 ## Setup
 
 ### Using channels
@@ -73,6 +75,7 @@ See code for all available configurations.
 | [Apple MacBook Air 6,X](apple/macbook-air/6)                        | `<nixos-hardware/apple/macbook-air/6>`             |
 | [Apple MacBook Pro 10,1](apple/macbook-pro/10-1)                    | `<nixos-hardware/apple/macbook-pro/10-1>`          |
 | [Apple MacBook Pro 12,1](apple/macbook-pro/12-1)                    | `<nixos-hardware/apple/macbook-pro/12-1>`          |
+| [Apple Macs with T2 Chips](apple/t2)                                | `<nixos-hardware/apple/t2>`                        |
 | [Asus ROG Strix G733QS](asus/rog-strix/g733qs)                      | `<nixos-hardware/asus/rog-strix/g733qs>`           |
 | [Asus ROG Zephyrus G14 GA401](asus/zephyrus/ga401)                  | `<nixos-hardware/asus/zephyrus/ga401>`             |
 | [Asus ROG Zephyrus G15 GA503](asus/zephyrus/ga503)                  | `<nixos-hardware/asus/zephyrus/ga503>`             |
