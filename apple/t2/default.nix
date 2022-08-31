@@ -39,6 +39,9 @@ in
     # For wifi
     hardware.firmware = [ pkgs.t2-firmware ];
 
+    services.connman.wifi.backend = "iwd";
+    networking.networkmanager.wifi.backend = "iwd";
+
     # For audio
     # Audio configuration files are from https://gist.github.com/MCMrARM/c357291e4e5c18894bea10665dcebffb, https://gist.github.com/kevineinarsson/8e5e92664f97508277fefef1b8015fba and https://gist.github.com/bigbadmonster17/8b670ae29e0b7be2b73887f3f37a057b
     boot.kernelParams = [ "pcie_ports=compat" "intel_iommu=on" "iommu=pt" ];
