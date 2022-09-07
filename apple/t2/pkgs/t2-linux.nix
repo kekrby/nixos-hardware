@@ -2,19 +2,19 @@
 
 let
   patchRepo = fetchFromGitHub {
-    owner = "Redecorating";
-    repo = "mbp-16.1-linux-wifi";
-    rev = "28559e3ebf40176121b35d2b5dfb7878ce76fdf8";
-    sha256 = "sha256-bflUMRmnXVEWwxJOCWzzLTtBYXMmHiLN75P1Ii/AoYc=";
+    owner = "kekrby";
+    repo = "linux-t2-patches";
+    rev = "f23da1653374fccd81d04a343f33d859163fefb9";
+    sha256 = "sha256-2H37pAvS9PW3/61mkcC+CjeCLnKD1NXyph21iNXJ3fs=";
   };
 
-  version = "5.19.6";
+  version = "5.19.7";
   # Snippet from nixpkgs
   modDirVersion = with lib; concatStringsSep "." (take 3 (splitVersion "${version}.0"));
 
   src = fetchurl {
     url = "mirror://kernel/linux/kernel/v5.x/linux-${version}.tar.xz";
-    sha256 = "sha256-QaT4JK9hRGDEKafHI+jcuw4ELwBH0yjBi07W8rTvpjo=";
+    sha256 = "sha256-uLtgGdQlXzkZZyb50PgvdhedHD18a2A0Me8Es4IBGZ8=";
   };
 in
 buildLinux {
@@ -28,8 +28,8 @@ buildLinux {
   };
 
   # 00xx => arch additions which are not really necesarry
-  # 10xx => apple-bce and apple-ibridge related patches which are not needed as they are built seperately
+  # 10xx, 201x => apple-bce and apple-ibridge related patches which are not needed as they are built seperately
   kernelPatches = lib.attrsets.mapAttrsToList (file: type: { name = file; patch = "${patchRepo}/${file}"; })
-    (lib.attrsets.filterAttrs (file: type: type == "regular" && lib.strings.hasSuffix ".patch" file && !lib.strings.hasPrefix "00" file && !lib.strings.hasPrefix "10" file)
+    (lib.attrsets.filterAttrs (file: type: type == "regular" && lib.strings.hasSuffix ".patch" file && !lib.any (x: lib.strings.hasPrefix x file) [ "00" "10" "201" ])
       (builtins.readDir patchRepo));
 }
