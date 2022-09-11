@@ -8,13 +8,13 @@ let
     sha256 = "sha256-2H37pAvS9PW3/61mkcC+CjeCLnKD1NXyph21iNXJ3fs=";
   };
 
-  version = "5.19.7";
+  version = "5.19.8";
   # Snippet from nixpkgs
   modDirVersion = with lib; concatStringsSep "." (take 3 (splitVersion "${version}.0"));
 
   src = fetchurl {
     url = "mirror://kernel/linux/kernel/v5.x/linux-${version}.tar.xz";
-    sha256 = "sha256-uLtgGdQlXzkZZyb50PgvdhedHD18a2A0Me8Es4IBGZ8=";
+    sha256 = "sha256-YWMIeVqVKmo5tMdIB8M5FoUOtxZtjtfJqHobpV10h84=";
   };
 in
 buildLinux {
