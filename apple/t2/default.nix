@@ -2,6 +2,14 @@
 
 let
   cfg = config.hardware.apple.t2;
+
+  audioFiles = (pkgs.fetchFromGitHub {
+    owner = "kekrby";
+    repo = "t2-zero-conf-audio";
+    rev = "ad5ab3ca55e01dfc84660a060fc21ee37a8b99d5";
+    sha256 = "sha256-nLZxiY9Xx1pTrG6xtObUiLDxmT56smS4vizGArnbGRI=";
+  });
+
   overrideAlsa = package: pluginsPath:
     (package.override {
       alsa-lib = pkgs.t2-alsa-lib;
@@ -9,7 +17,7 @@ let
       preConfigurePhases = old.preConfigurePhases or [] ++ [ "postPatchPhase" ];
 
       postPatchPhase = ''
-        cp ${./files/audio/profile-sets}/* ${pluginsPath}/alsa/mixer/profile-sets
+        cp ${audioFiles}/files/profile-sets/* ${pluginsPath}/alsa/mixer/profile-sets
       '';
     });
 in
@@ -19,7 +27,7 @@ in
       (self: super: {
         t2-alsa-lib = pkgs.alsa-lib.overrideAttrs (new: old: {
           postInstall = old.postInstall or "" + ''
-            cp ${./files/audio/alsa-card-configs}/* "$out/share/alsa/cards/"
+            cp ${audioFiles}/files/alsa-card-configs/* "$out/share/alsa/cards/"
           '';
         });
       })
@@ -45,15 +53,10 @@ in
   # For audio
   # Audio configuration files are from https://gist.github.com/MCMrARM/c357291e4e5c18894bea10665dcebffb, https://gist.github.com/kevineinarsson/8e5e92664f97508277fefef1b8015fba and https://gist.github.com/bigbadmonster17/8b670ae29e0b7be2b73887f3f37a057b
   boot.kernelParams = [ "pcie_ports=compat" "intel_iommu=on" "iommu=pt" ];
-  services.udev.extraRules = ''
-    SUBSYSTEM!="sound", GOTO="pulseaudio_end"
-    ACTION!="change", GOTO="pulseaudio_end"
-    KERNEL!="card*", GOTO="pulseaudio_end"
-
-    SUBSYSTEMS=="pci", ATTRS{vendor}=="0x106b", ATTRS{device}=="0x1803", PROGRAM="${pkgs.gnused}/bin/sed -n 's/.*AppleT2x\([248]\).*/\1/p' /proc/asound/cards", ENV{PULSE_PROFILE_SET}="apple-t2x%c.conf", ENV{ACP_PROFILE_SET}="apple-t2x%c.conf"
-
-    LABEL="pulseaudio_end"
-  '';
+  services.udev.extraRules = builtins.readFile (pkgs.substitute {
+    src = "${audioFiles}/files/91-pulseaudio-custom.rules";
+    replacements = [ "--replace" "/usr/bin/sed" "${pkgs.gnused}/bin/sed" ];
+  });
 
   hardware.pulseaudio.package = overrideAlsa pkgs.pluseaudio "src/modules/";
 
