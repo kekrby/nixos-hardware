@@ -4,10 +4,10 @@ stdenv.mkDerivation {
   name = "apple-bce";
 
   src = fetchFromGitHub {
-    owner = "T2Linux";
-    repo = "apple-bce-drv";
-    rev = "f93c6566f98b3c95677de8010f7445fa19f75091";
-    sha256 = "sha256-5jvfDSa7tHp6z+E+RKIalNiLpsku1RNnKoJV2Ps8288=";
+    owner = "kekrby";
+    repo = "apple-bce";
+    rev = "170e7ad37166319f1a13b37e52f83a43608826b5";
+    sha256 = "sha256-7f/j5YpP5xBPXPXIvjk1wSBvGbwXMvjJ5fPgW/Frgio=";
   };
 
   makeFlags = [

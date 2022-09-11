@@ -12,8 +12,6 @@ Since the keyboard driver and the changes to the WiFi driver are not mainlined y
 The rest is same as any NixOS installation, just don't forget to import this module in your `configuration.nix`!
 
 ## Audio
-On certain Macs, you need have to set the `hardware.apple.t2.audioModel` to get audio working, most models don't need this though. See `default.nix` for the list of models that do require the option being set for audio to function correctly.
-
 Support for both PulseAudio and PipeWire is included, but you should prefer using PipeWire as it works much better unless you have other reasons. For example, on this machine PulseAudio does not work at all with headphones while PipeWire works flawlessly.
 
 ## Firmware
