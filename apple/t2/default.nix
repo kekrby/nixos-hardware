@@ -6,8 +6,8 @@ let
   audioFiles = (pkgs.fetchFromGitHub {
     owner = "kekrby";
     repo = "t2-zero-conf-audio";
-    rev = "ad5ab3ca55e01dfc84660a060fc21ee37a8b99d5";
-    sha256 = "sha256-nLZxiY9Xx1pTrG6xtObUiLDxmT56smS4vizGArnbGRI=";
+    rev = "1e10945e326c923d19093a513d66281207438979";
+    sha256 = "sha256-op2e1H78pZxJBxQa355znPp0OnneubKjmOcoVJlUgaU=";
   });
 
   overrideAlsa = package: pluginsPath:
