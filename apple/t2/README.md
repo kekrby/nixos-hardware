@@ -16,6 +16,3 @@ Support for both PulseAudio and PipeWire is included, but you should prefer usin
 
 ## Firmware
 T2 Macs require firmware for WiFi (the models with the BCM4377 chip also need firmware for bluetooth). The firmware will be extracted from Apple's official recovery images which might take a while (`building <...>.dmg`) but this will only happen during the initial build and won't happen if you install from a prebuilt iso. The firmware package (`pkgs.t2-firmware`) is unfree and `nixpkgs.config.allowUnfreePredicate` is set to a function that allows it to be installed.
-
-## Networking
-WiFi works quite well but note that and `iwd` is recommeded over `wpa_supplicant` and this module will set it as the default backend for both `NetworkManager` and `connman`.
