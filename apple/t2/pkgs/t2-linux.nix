@@ -2,10 +2,10 @@
 
 let
   patchRepo = fetchFromGitHub {
-    owner = "kekrby";
-    repo = "linux-t2-patches";
-    rev = "f23da1653374fccd81d04a343f33d859163fefb9";
-    sha256 = "sha256-2H37pAvS9PW3/61mkcC+CjeCLnKD1NXyph21iNXJ3fs=";
+    owner = "Redecorating";
+    repo = "linux-t2-arch";
+    rev = "65a5575de77284c0a36c95510ebaaa8e8a867bc5";
+    sha256 = "sha256-c5cTWLyGsuudyvz3PIDgJ7sd8veB/x6z/XpsK7M82lY=";
   };
 
   version = "5.19.8";
