@@ -55,7 +55,7 @@ in
     replacements = [ "--replace" "/usr/bin/sed" "${pkgs.gnused}/bin/sed" ];
   });
 
-  hardware.pulseaudio.package = overrideAlsa pkgs.pluseaudio "src/modules/";
+  hardware.pulseaudio.package = overrideAlsa pkgs.pulseaudio "src/modules/";
 
   services.pipewire = rec {
     package = overrideAlsa pkgs.pipewire "spa/plugins/";
