@@ -1,7 +1,5 @@
 NixOS profiles to optimize settings for different hardware.
 
-**Note**: This fork requires a nixpkgs with this PR merged: [188478](https://github.com/NixOS/nixpkgs/pull/188478).
-
 ## Setup
 
 ### Using channels

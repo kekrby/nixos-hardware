@@ -15,4 +15,4 @@ The rest is same as any NixOS installation, just don't forget to import this mod
 Support for both PulseAudio and PipeWire is included, but you should prefer using PipeWire as it works much better unless you have other reasons. For example, on this machine PulseAudio does not work at all with headphones while PipeWire works flawlessly.
 
 ## Firmware
-T2 Macs require firmware for WiFi (the models with the BCM4377 chip also need firmware for bluetooth). The firmware will be extracted from Apple's official recovery images which might take a while (`building <...>.dmg`) but this will only happen during the initial build and won't happen if you install from a prebuilt iso. The firmware package (`pkgs.t2-firmware`) is unfree and `nixpkgs.config.allowUnfreePredicate` is set to a function that allows it to be installed.
+T2 Macs require firmware for WiFi (the models with the BCM4377 chip also need firmware for bluetooth). Because the firmware is not provided with a redistrubutable license, you have to get it from macOS. How to do that, along with other things, is explained in detail at the [installation guide](https://wiki.t2linux.org/distributions/nixos/installation/).
