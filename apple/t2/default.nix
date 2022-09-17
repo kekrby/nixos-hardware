@@ -5,31 +5,22 @@ let
 
   audioFiles = (pkgs.fetchFromGitHub {
     owner = "kekrby";
-    repo = "t2-zero-conf-audio";
-    rev = "1e10945e326c923d19093a513d66281207438979";
-    sha256 = "sha256-op2e1H78pZxJBxQa355znPp0OnneubKjmOcoVJlUgaU=";
+    repo = "t2-better-audio";
+    rev = "59949d5a35f240da289cc591d3890f81cd40d050";
+    sha256 = "sha256-90WPzGkQDGGss0frs2N3tO77VFACOXu7hvLNowpBi3U=";
   });
-
-  overrideAlsa = package: pluginsPath:
-    (package.override {
-      alsa-lib = pkgs.t2-alsa-lib;
-    }).overrideAttrs (new: old: {
-      preConfigurePhases = old.preConfigurePhases or [] ++ [ "postPatchPhase" ];
-
-      postPatchPhase = ''
-        cp ${audioFiles}/files/profile-sets/* ${pluginsPath}/alsa/mixer/profile-sets
-      '';
-    });
 in
 {
   nixpkgs = {
     overlays = [
       (self: super: {
-        t2-alsa-lib = pkgs.alsa-lib.overrideAttrs (new: old: {
-          postInstall = old.postInstall or "" + ''
-            cp ${audioFiles}/files/alsa-card-configs/* "$out/share/alsa/cards/"
-          '';
-        });
+        t2-alsa-lib = pkgs.alsa-lib.override {
+          alsa-ucm-conf = pkgs.alsa-ucm-conf.overrideAttrs (new: old: {
+            postInstall = old.postInstall or "" + ''
+              cp -r ${audioFiles}/files/ucm2/* "$out/share/alsa/ucm2/"
+            '';
+          });
+        };
       })
     ] ++ map (pkg: self: super: { ${pkg} = super.callPackage ./pkgs/${super.lib.strings.toLower pkg}.nix {}; })
       [ "extractDiskImage" "t2-firmware" "t2-linux" "apple-bce" "apple-ibridge" ]; # Some packages depend on others so they have to be imported with order
@@ -45,17 +36,16 @@ in
   boot.initrd.kernelModules = [ "apple-bce" ];
 
   # For audio
-  # Audio configuration files are from https://gist.github.com/MCMrARM/c357291e4e5c18894bea10665dcebffb, https://gist.github.com/kevineinarsson/8e5e92664f97508277fefef1b8015fba and https://gist.github.com/bigbadmonster17/8b670ae29e0b7be2b73887f3f37a057b
   boot.kernelParams = [ "pcie_ports=compat" "intel_iommu=on" "iommu=pt" ];
-  services.udev.extraRules = builtins.readFile (pkgs.substitute {
-    src = "${audioFiles}/files/91-pulseaudio-custom.rules";
-    replacements = [ "--replace" "/usr/bin/sed" "${pkgs.gnused}/bin/sed" ];
-  });
 
-  hardware.pulseaudio.package = overrideAlsa pkgs.pulseaudio "src/modules/";
+  hardware.pulseaudio.package = pkgs.pulseaudio.override {
+    alsa-lib = pkgs.t2-alsa-lib;
+  };
 
   services.pipewire = rec {
-    package = overrideAlsa pkgs.pipewire "spa/plugins/";
+    package = pkgs.pipewire.override {
+      alsa-lib = pkgs.t2-alsa-lib;
+    };
 
     wireplumber.package = pkgs.wireplumber.override {
       pipewire = package;

@@ -6,8 +6,8 @@ stdenv.mkDerivation {
   src = fetchFromGitHub {
     owner = "kekrby";
     repo = "apple-bce";
-    rev = "170e7ad37166319f1a13b37e52f83a43608826b5";
-    sha256 = "sha256-7f/j5YpP5xBPXPXIvjk1wSBvGbwXMvjJ5fPgW/Frgio=";
+    rev = "dc3188291922ca78e4b4422187f42cc722bfba69";
+    sha256 = "sha256-goAP/9tn7S8eEtjHceOvrPvQ5nKI2Vzx9lgAdfUeISY=";
   };
 
   makeFlags = [
