@@ -6,8 +6,8 @@ let
   audioFiles = (pkgs.fetchFromGitHub {
     owner = "kekrby";
     repo = "t2-better-audio";
-    rev = "59949d5a35f240da289cc591d3890f81cd40d050";
-    sha256 = "sha256-90WPzGkQDGGss0frs2N3tO77VFACOXu7hvLNowpBi3U=";
+    rev = "e4e9fba49c6352adeba315c5fc22e2a41b6059b4";
+    sha256 = "sha256-yN2zTms/Vgr9QTtf9ulveOD7dQgHHRbbDs8gbA0AD6M=";
   });
 in
 {
