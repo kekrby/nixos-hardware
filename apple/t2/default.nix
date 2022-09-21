@@ -38,9 +38,16 @@ in
   # For audio
   boot.kernelParams = [ "pcie_ports=compat" "intel_iommu=on" "iommu=pt" ];
 
-  hardware.pulseaudio.package = pkgs.pulseaudio.override {
+  hardware.pulseaudio.package = (pkgs.pulseaudio.override {
     alsa-lib = pkgs.t2-alsa-lib;
-  };
+  }).overrideAttrs (new: old: {
+    patches = old.patches ++ [
+      (builtins.fetchurl {
+        url = "https://gitlab.freedesktop.org/pulseaudio/pulseaudio/-/merge_requests/596.patch";
+        sha256 = "sha256-e64GA+cUjTmVYpnIkhed3E+FzWB0pwNVsMDxp2EvGHo=";
+      })
+    ];
+  });
 
   services.pipewire = rec {
     package = pkgs.pipewire.override {
