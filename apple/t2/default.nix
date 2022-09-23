@@ -23,11 +23,7 @@ in
         };
       })
     ] ++ map (pkg: self: super: { ${pkg} = super.callPackage ./pkgs/${super.lib.strings.toLower pkg}.nix {}; })
-      [ "extractDiskImage" "t2-firmware" "t2-linux" "apple-bce" "apple-ibridge" ]; # Some packages depend on others so they have to be imported with order
-
-    config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-      "t2-firmware"
-    ];
+      [ "t2-linux" "apple-bce" "apple-ibridge" ]; # Some packages depend on others so they have to be imported with order
   };
 
   # For keyboard and touchbar
