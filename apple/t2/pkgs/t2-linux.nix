@@ -5,7 +5,7 @@ let
     owner = "Redecorating";
     repo = "linux-t2-arch";
     rev = "ede033e1549091cda1471114f9d77f1053c40132";
-    sha256 = "sha256-HHhVMdLUYgEb4D8U0HnyF9n9qFBQldFZPeUoLqdA4l8=";
+    sha256 = "sha256-HHhVMdLBYgEb4D8U0HnyF9n9qFBQldFZPeUoLqdA4l8=";
   };
 
   version = "5.19.12";
