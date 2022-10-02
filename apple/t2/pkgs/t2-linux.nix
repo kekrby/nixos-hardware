@@ -4,8 +4,8 @@ let
   patchRepo = fetchFromGitHub {
     owner = "Redecorating";
     repo = "linux-t2-arch";
-    rev = "65a5575de77284c0a36c95510ebaaa8e8a867bc5";
-    sha256 = "sha256-c5cTWLyGsuudyvz3PIDgJ7sd8veB/x6z/XpsK7M82lY=";
+    rev = "ede033e1549091cda1471114f9d77f1053c40132";
+    sha256 = "sha256-0pz282kjwa757mcx35aha2lgvn8py9wx051zw0dh2qnls8qmay0w";
   };
 
   version = "5.19.12";
