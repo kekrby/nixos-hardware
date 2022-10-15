@@ -4,18 +4,18 @@ let
   patchRepo = fetchFromGitHub {
     owner = "kekrby";
     repo = "linux-t2-patches";
-    rev = "3e7a6c1c82c8d201708292e075e36fe6b9a934da";
-    sha256 = "sha256-va3Ch0uJuBCy3wQo7UCnkm19z+tba8/gdOUKOofY/wk=";
+    rev = "e0a7a3af6aed1842553d3930846fb579bbf1c490";
+    sha256 = "sha256-MsP8ugEH5tmvmmdTP5azpV++AXrWv8ortQ9oy9FV/oI=";
   };
 
-  version = "6.0.1";
+  version = "6.0.2";
   majorVersion = with lib; (elemAt (take 1 (splitVersion version)) 0);
   # Snippet from nixpkgs
   modDirVersion = with lib; concatStringsSep "." (take 3 (splitVersion "${version}.0"));
 
   src = fetchurl {
     url = "mirror://kernel/linux/kernel/v${majorVersion}.x/linux-${version}.tar.xz";
-    sha256 = "sha256-jt50Wmk1HqDyf+DEh4DU76N/8IYTXhKTWM4JaUlX6Pk=";
+    sha256 = "sha256-oTwmOIyszLaEzZ9REJWWooDIGGt+lRdNMe58VxjpXJ0=";
   };
 in
 buildLinux {
