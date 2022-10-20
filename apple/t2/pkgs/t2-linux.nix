@@ -4,8 +4,8 @@ let
   patchRepo = fetchFromGitHub {
     owner = "kekrby";
     repo = "linux-t2-patches";
-    rev = "e0a7a3af6aed1842553d3930846fb579bbf1c490";
-    sha256 = "sha256-MsP8ugEH5tmvmmdTP5azpV++AXrWv8ortQ9oy9FV/oI=";
+    rev = "2cab5e4525b9dd7377b067cf645bae6f460fe30b";
+    sha256 = "sha256-EavU+90IY8SKquT8DhXnjASXFvy/PgxvwZpsDw85d5U=";
   };
 
   version = "6.0.2";
