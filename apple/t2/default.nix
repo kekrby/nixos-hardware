@@ -6,8 +6,8 @@ let
   audioFiles = pkgs.fetchFromGitHub {
     owner = "kekrby";
     repo = "t2-better-audio";
-    rev = "adbd7640b4055dc79a334ea4d31572e9599b4365";
-    sha256 = "sha256-eoh64WAqhKRJ4m/8WRoX1kn1YJQ9+VicuCkOGk50YuQ=";
+    rev = "e46839a28963e2f7d364020518b9dac98236bcae";
+    sha256 = "sha256-x7K0qa++P1e1vuCGxnsFxL1d9+nwMtZUJ6Kd9e27TFs=";
   };
 
   overrideAudioFiles = package: pluginsPath:
