@@ -8,14 +8,14 @@ let
     sha256 = "sha256-a2Tc3LaNxNkqltKN7zPc6K51hL5H8dTCCOJf/v2fBHg=";
   };
 
-  version = "6.0.3";
+  version = "6.0.5";
   majorVersion = with lib; (elemAt (take 1 (splitVersion version)) 0);
   # Snippet from nixpkgs
   modDirVersion = with lib; concatStringsSep "." (take 3 (splitVersion "${version}.0"));
 
   src = fetchurl {
     url = "mirror://kernel/linux/kernel/v${majorVersion}.x/linux-${version}.tar.xz";
-    sha256 = "sha256-sNUiJBgFeU2K86Z9MxugY6Fklsb7bTZdSPfteO4cPc8=";
+    sha256 = "sha256-YTMu8itTxQwQ+qv7lliWp9GtTzOB8PiWQ8gg8opgQY4=";
   };
 in
 buildLinux {
