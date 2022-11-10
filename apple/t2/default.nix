@@ -45,10 +45,8 @@ in
     };
   };
 
-  # Suspend does not work well, it should not be enabled
-  services.logind = {
-    lidSwitch = "lock";
-    lidSwitchDocked = "lock";
-    lidSwitchExternalPower = "lock";
+  powerManagement = {
+    powerUpCommands = "${pkgs.kmod}/bin/modprobe apple_ib_tb";
+    powerDownCommands = "${pkgs.kmod}/bin/rmmod apple_ib_tb";
   };
 }
