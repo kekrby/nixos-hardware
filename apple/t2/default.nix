@@ -20,12 +20,8 @@ let
     });
 in
 {
-  nixpkgs.overlays = map (pkg: self: super: { ${pkg} = super.callPackage ./pkgs/${super.lib.strings.toLower pkg}.nix {}; })
-    [ "t2-linux" "apple-bce" "apple-ibridge" ]; # Some packages depend on others so they have to be imported with order
-
   # For keyboard and touchbar
-  boot.kernelPackages = with pkgs; linuxPackagesFor t2-linux;
-  boot.extraModulePackages = with pkgs; [ apple-bce apple-ibridge ];
+  boot.kernelPackages = with pkgs; recurseIntoAttrs (linuxPackagesFor (callPackage ./pkgs/linux-t2.nix {}));
   boot.initrd.kernelModules = [ "apple-bce" ];
 
   # For audio
@@ -46,7 +42,7 @@ in
   };
 
   powerManagement = {
-    powerUpCommands = "${pkgs.kmod}/bin/modprobe apple_ib_tb";
-    powerDownCommands = "${pkgs.kmod}/bin/rmmod apple_ib_tb";
+    powerUpCommands = "${pkgs.kmod}/bin/modprobe apple_touchbar";
+    powerDownCommands = "${pkgs.kmod}/bin/rmmod apple_touchbar";
   };
 }
