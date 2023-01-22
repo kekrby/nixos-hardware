@@ -2,7 +2,7 @@
 
 buildLinux (args // rec {
   pname = "linux-t2";
-  version = "6.1.3";
+  version = "6.1.7";
   # Snippet from nixpkgs
   modDirVersion = with lib; "${concatStringsSep "." (take 3 (splitVersion "${version}.0"))}-t2";
 
@@ -10,7 +10,7 @@ buildLinux (args // rec {
     owner = "kekrby";
     repo = "linux-t2";
     rev = "v${version}-t2";
-    sha256 = "sha256-I+4IlArSGkUJKUZVZTqThXn8x4bJBLdCLop44hmfEX8=";
+    sha256 = "sha256-2gxMabU6RZKVcHuxYypDkI+M8tzc0iW0heSEBzUpj/U=";
   };
 
   kernelPatches = [];
