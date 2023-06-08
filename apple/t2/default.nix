@@ -22,7 +22,8 @@ in
 {
   # For keyboard and touchbar
   boot.kernelPackages = with pkgs; recurseIntoAttrs (linuxPackagesFor (callPackage ./pkgs/linux-t2.nix {}));
-  boot.initrd.kernelModules = [ "apple-bce" ];
+  boot.initrd.kernelModules = [ "apple_bce" ];
+  boot.kernelModules = [ "apple_touchbar" ];
 
   # For audio
   boot.kernelParams = [ "pcie_ports=compat" "intel_iommu=on" "iommu=pt" ];
@@ -39,10 +40,5 @@ in
     wireplumber.package = pkgs.wireplumber.override {
       pipewire = package;
     };
-  };
-
-  powerManagement = {
-    powerUpCommands = "${pkgs.kmod}/bin/modprobe apple_touchbar";
-    powerDownCommands = "${pkgs.kmod}/bin/rmmod apple_touchbar";
   };
 }
